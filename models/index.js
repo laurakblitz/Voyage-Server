@@ -1,3 +1,5 @@
 const editLog = require('./editlog');
 
-module.exports = {editLog}
+const Logs = require('./logs');
+
+module.exports = {Logs, editLog}

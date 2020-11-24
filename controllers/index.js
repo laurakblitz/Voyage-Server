@@ -1,3 +1,4 @@
 module.exports = {
-    editlogcontroller: require('./editlogcontroller')
+    editlogcontroller: require('./editlogcontroller'),
+    logscontroller: require('./logscontroller')
 }

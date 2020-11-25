@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 const { UniqueConstraintError } = require("sequelize/lib/errors");
 const { Model } = require("sequelize");
 
+//******************** (POST) Register a user ********************//
 router.post('/register', async (req, res) => {
   
    let { userName, email, password } = req.body.user;
@@ -34,6 +35,8 @@ router.post('/register', async (req, res) => {
     }
   }
 })
+
+//******************** (POST) Login ********************//
 router.post('/login', async (req, res) => {
   let {email, password} = req.body;
 
@@ -57,13 +60,10 @@ router.post('/login', async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({
-      error:'Error loggin in!'
+      error:'Error logging in!'
     })
     
   }
 })
-
-
-
 
 module.exports = router;

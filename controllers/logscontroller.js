@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const { Logs } = require('../models');
 
-router.get('/test', (req, res) => res.send('helllo'));
+router.get('/test', (req, res) => res.send('hello'));
 
+//******************** (GET) Get all logs ********************//
 router.get('/getlogs', (req, res)=>{
     Logs.findAll()
     .then(logs => res.status(200).json(logs))
@@ -12,6 +13,7 @@ router.get('/getlogs', (req, res)=>{
     }))
 })
 
+//******************** (POST) Create a log ********************//
 router.post('/createlog', async (req, res)=>{
     try {
         const {location, season, stay, food, rating} = req.body;

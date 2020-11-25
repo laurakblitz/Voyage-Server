@@ -4,6 +4,14 @@ const { Logs } = require('../models');
 
 router.get('/test', (req, res) => res.send('helllo'));
 
+router.get('/getlogs', (req, res)=>{
+    Logs.findAll()
+    .then(logs => res.status(200).json(logs))
+    .catch(err => res.status(500).json({
+        error: err
+    }))
+})
+
 router.post('/createlog', async (req, res)=>{
     try {
         const {location, season, stay, food, rating} = req.body;

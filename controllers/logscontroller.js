@@ -18,7 +18,7 @@ router.post('/createlog', async (req, res)=>{
         let newLog = await Logs.create({location, season, stay, food, rating});
         res.status(200).json({
             log: newLog,
-            message: "Destination Added"
+            message: "Voyage Added!"
         })
     } catch (error) {
         console.log(error);

@@ -1,6 +1,5 @@
 require("dotenv").config();
 const express = require("express");
-
 const db = require("./db");
 const app = express();
 
@@ -15,6 +14,11 @@ const controllers = require("./controllers");
 app.use("/user", controllers.usercontroller);
 
 
+app.use('/logs', controllers.logscontroller)
+
+// app.use(require('./middleware/validateSession'));
+app.use("/log", controllers.editlogcontroller);
+
 db.authenticate()
   .then(() => db.sync()) // => {force: true}
   .then(() => {
@@ -24,5 +28,3 @@ db.authenticate()
     console.log("[Server:] Server Crashed");
     console.error(err);
   });
-
-//testing//

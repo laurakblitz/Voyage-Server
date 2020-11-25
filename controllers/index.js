@@ -1,7 +1,5 @@
-const { model } = require("../db");
-
-const User = require('./usercontroller');
-
 module.exports = {
-  usercontroller: require("./usercontroller"),
-};
+    usercontroller: require("./usercontroller"),
+    editlogcontroller: require('./editlogcontroller'),
+    logscontroller: require('./logscontroller')
+}

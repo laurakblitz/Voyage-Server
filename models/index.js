@@ -1,4 +1,8 @@
 //const router = require('express').Router();
 const User = require('./user');
 
-module.exports = {User}
+const editLog = require('./editlog');
+
+const Logs = require('./logs');
+
+module.exports = {User, Logs, editLog}

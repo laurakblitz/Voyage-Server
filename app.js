@@ -13,10 +13,9 @@ const controllers = require("./controllers");
 
 app.use("/user", controllers.usercontroller);
 
+app.use("/voyage", controllers.logscontroller)
 
-app.use('/logs', controllers.logscontroller)
-
-// app.use(require('./middleware/validateSession'));
+app.use(require('./middleware/validateSession'));
 app.use("/logs", controllers.editlogcontroller);
 
 db.authenticate()

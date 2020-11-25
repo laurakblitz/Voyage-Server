@@ -34,6 +34,35 @@ router.post('/register', async (req, res) => {
     }
   }
 })
+router.post('/login', async (req, res) => {
+  let {email, password} = req.body;
+
+  try {
+    let loginUser = await User.findOne({
+      where:{ email }
+    })
+    // console.log("loginUser", loginUser)
+    if(loginUser && await bcrypt.compare(password, loginUser.password)) {
+
+      const token = jwt.sign({id: loginUser.id}, process.env.JWT_SECRET, {expiresIn: 60*60*24})
+      res.status(200).json({
+        message: 'Login successful!',
+        user: loginUser,
+        token
+      })
+    } else {
+      res.status(400).json({
+        message:'Login Failed.'
+      })
+    }
+  } catch (error) {
+    res.status(500).json({
+      error:'Error loggin in!'
+    })
+    
+  }
+})
+
 
 
 

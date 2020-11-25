@@ -1,13 +1,13 @@
 const express = require('express');
 const validateSession = require('../middleware/validateSession');
 const router = express.Router();
-const {editLog} = require('../models');
+const {Logs} = require('../models');
 
 
 //******************** (PUT) log/update/:id => Allow user to update log by id ********************//
 router.put("/update/:id", validateSession, function (req, res) {
 
-    const updateEditLog = {
+    const updateLogs = {
         location: req.body.location,
         season: req.body.season,
         stay: req.body.stay,
@@ -17,18 +17,18 @@ router.put("/update/:id", validateSession, function (req, res) {
 
     const query = { where: { id: req.params.id, owner_id: req.user.id } };
 
-    editLog.update(updateEditLog, query)
-    .then((editlogs) => res.status(200).json(editlogs))
+    Logs.update(updateLogs, query)
+    .then((logs) => res.status(200).json(logs))
     .catch((err) => res.status(500).json({ error: err })); 
 
 });
 
 //******************** (DELETE) log/delete/:id => Allow user to delete an individual log ********************//
 router.delete("/delete/:id", validateSession, (req, res) => {
-    editLog.destroy({
+    Logs.destroy({
         where: { id: req.params.id, owner_id: req.user.id }
     })
-    .then(editlog => res.status(200).json(editlog))
+    .then(logs => res.status(200).json(logs))
     .catch(err => res.json({error: err}))
 })
 

@@ -17,7 +17,7 @@ app.use("/user", controllers.usercontroller);
 app.use('/logs', controllers.logscontroller)
 
 // app.use(require('./middleware/validateSession'));
-app.use("/log", controllers.editlogcontroller);
+app.use("/logs", controllers.editlogcontroller);
 
 db.authenticate()
   .then(() => db.sync()) // => {force: true}

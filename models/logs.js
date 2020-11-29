@@ -21,6 +21,11 @@ const Logs = db.define("logs", {
     rating: {
         type: DataTypes.INTEGER,
         allowNull: true
+    },
+    // ADDED to view only logged in user's logs
+    owner_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false
     }
 })
 

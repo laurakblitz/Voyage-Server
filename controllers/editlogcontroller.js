@@ -4,7 +4,7 @@ const router = express.Router();
 const {Logs} = require('../models');
 
 //******************** (PUT) Allow user to update log by id ********************//
-router.put("/update/:id", validateSession, function (req, res) {
+router.put("/update/:id", /*validateSession,*/ function (req, res) {
 
     const updateLogs = {
         location: req.body.location,
@@ -24,7 +24,7 @@ router.put("/update/:id", validateSession, function (req, res) {
 });
 
 //******************** (DELETE) Allow user to delete an individual log ********************//
-router.delete("/delete/:id", validateSession, (req, res) => {
+router.delete("/delete/:id", /*validateSession,*/ (req, res) => {
     Logs.destroy({
         where: { id: req.params.id }
         // where: { id: req.params.id, owner_id: req.user.id }

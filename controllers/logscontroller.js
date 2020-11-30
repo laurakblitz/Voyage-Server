@@ -4,15 +4,6 @@ const { Logs } = require('../models');
 
 router.get('/test', (req, res) => res.send('hello'));
 
-//******************** (GET) Get all logs ********************//
-router.get('/getlogs', (req, res)=>{
-    Logs.findAll()
-    .then(logs => res.status(200).json(logs))
-    .catch(err => res.status(500).json({
-        error: err
-    }))
-})
-
 //******************** (POST) Create a log ********************//
 router.post('/createlog', async (req, res)=>{
     try {
@@ -29,5 +20,45 @@ router.post('/createlog', async (req, res)=>{
         })
     }
 })
+
+//******************** (GET) Get all logs ********************//
+router.get('/getlogs', (req, res)=>{
+    Logs.findAll()
+    .then(logs => res.status(200).json(logs))
+    .catch(err => res.status(500).json({
+        error: err
+    }))
+})
+
+// BRAINSTORMING IDEAS FOR ADDITIONAL ENDPOINTS
+// //******************** (GET) Get individual logs by id for individual user ********************//
+// router.get('/:id', validateSession, (req, res) => {
+
+//     Logs.findOne({
+//         where: { id: req.params.id, owner_id: req.user.id }
+//     })
+//     .then((logs) => res.status(200).json(logs))
+//     .catch((err) => res.status(500).json({ error: err }));
+// });
+
+// //******************** (GET) Get logs by location for an individual user ********************//
+// router.get('/location', validateSession, (req, res) => {
+
+//     Logs.findOne({
+//         where: { location: req.params.location, owner_id: req.user.id }
+//     })
+//     .then((logs) => res.status(200).json(logs))
+//     .catch((err) => res.status(500).json({ error: err }));
+// });
+
+// //******************** (GET) Get logs by rating for an individual user ********************//
+// router.get('/rating', validateSession, (req, res) => {
+
+//     Logs.findOne({
+//         where: { rating: req.params.rating, owner_id: req.user.id }
+//     })
+//     .then((logs) => res.status(200).json(logs))
+//     .catch((err) => res.status(500).json({ error: err }));
+// });
 
 module.exports = router;

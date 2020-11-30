@@ -10,14 +10,15 @@ app.use(require("./middleware/headers"));
 app.use(express.json());
 
 const controllers = require("./controllers");
-const validateSession = require("./middleware/validateSession");
+// const validateSession = require("./middleware/validateSession");
 
 app.use("/user", controllers.usercontroller);
 
-app.use('/voyage', validateSession, controllers.logscontroller)
+app.use('/voyage', /*validateSession,*/ controllers.logscontroller)
 
-app.use(require('./middleware/validateSession'));
-app.use("/logs", controllers.editlogcontroller);
+// app.use(require('./middleware/validateSession'));
+// app.use("/logs", controllers.editlogcontroller);
+app.use("/voyage", controllers.editlogcontroller);
 
 db.authenticate()
   .then(() => db.sync()) // => {force: true}

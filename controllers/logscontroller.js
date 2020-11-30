@@ -6,8 +6,16 @@ router.get('/test', (req, res) => res.send('hello'));
 
 //******************** (GET) Get all logs ********************//
 router.get('/getlogs', (req, res)=>{
-    Logs.findAll()
-    .then(logs => res.status(200).json(logs))
+    // ADDED to view only logged in user's logs
+    let userId = req.user.id
+    Logs.findAll({
+        //ADDED to view only logged in user's logs
+        where: {owner_id: userId}
+    })
+    .then(logs => res.status(200).json({
+        logs: logs,
+        message: 'All of Logged in Users Logs Retrieved'
+    }))
     .catch(err => res.status(500).json({
         error: err
     }))
@@ -17,7 +25,8 @@ router.get('/getlogs', (req, res)=>{
 router.post('/createlog', async (req, res)=>{
     try {
         const {location, season, stay, food, rating} = req.body;
-        let newLog = await Logs.create({location, season, stay, food, rating});
+                                                                        // ADDED to add owner_id to logs
+        let newLog = await Logs.create({location, season, stay, food, rating, owner_id: req.user.id});
         res.status(200).json({
             log: newLog,
             message: "Voyage Added!"

@@ -40,7 +40,7 @@ router.get('/getlogs', (req, res)=>{
 })
 
 //******************** (PUT) Allow user to update log by id ********************//
-router.put("/update/:id", /*validateSession,*/ function (req, res) {
+router.put("/update/:id", function (req, res) {
 
     const updateLogs = {
         location: req.body.location,
@@ -50,8 +50,8 @@ router.put("/update/:id", /*validateSession,*/ function (req, res) {
         rating: req.body.rating
     };
 
-    const query = { where: { id: req.params.id } };
-    // const query = { where: { id: req.params.id, owner_id: req.user.id } };
+    // const query = { where: { id: req.params.id } };
+    const query = { where: { id: req.params.id, owner_id: req.user.id } };
 
     Logs.update(updateLogs, query)
     .then((logs) => res.status(200).json(logs))
@@ -60,14 +60,15 @@ router.put("/update/:id", /*validateSession,*/ function (req, res) {
 });
 
 //******************** (DELETE) Allow user to delete an individual log ********************//
-router.delete("/delete/:id", /*validateSession,*/ (req, res) => {
+router.delete("/delete/:id", (req, res) => {
     Logs.destroy({
-        where: { id: req.params.id }
-        // where: { id: req.params.id, owner_id: req.user.id }
+        // where: { id: req.params.id }
+        where: { id: req.params.id, owner_id: req.user.id }
     })
     .then(logs => res.status(200).json(logs))
     .catch(err => res.json({error: err}))
 })
+
 
 // BRAINSTORMING IDEAS FOR ADDITIONAL ENDPOINTS
 // //******************** (GET) Get individual logs by id for individual user ********************//

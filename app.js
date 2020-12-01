@@ -10,6 +10,7 @@ app.use(require("./middleware/headers"));
 app.use(express.json());
 
 const controllers = require("./controllers");
+
 const validateSession = require("./middleware/validateSession");
 
 app.use("/user", controllers.usercontroller);

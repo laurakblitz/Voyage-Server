@@ -15,7 +15,7 @@ const validateSession = require("./middleware/validateSession");
 
 app.use("/user", controllers.usercontroller);
 
-app.use('/voyage', validateSession, controllers.logscontroller)
+app.use("/voyage", validateSession, controllers.logscontroller);
 
 // app.use(require('./middleware/validateSession'));
 
